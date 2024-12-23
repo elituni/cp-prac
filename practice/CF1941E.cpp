@@ -13,6 +13,16 @@ int main(){
 
     for(ll i = 0; i < t; i++){
         cin >> row >> col >> bridges >> dist;
+        if(dist >= col-2){
+          int del;
+          for(ll j = 0; j < row; j++){
+            for(ll k = 0; k < col; k++){
+                cin >> del;
+            }
+          }
+          cout << 2*bridges << '\n';
+          continue;
+        }
         dist++;
         vector<vector<ll>> river(row, vector<ll>(col));
         vector<ll> row_costs(row);
@@ -27,27 +37,21 @@ int main(){
         for(ll j = 0; j < row; j++){
             multiset<ll> window;
             window.insert(1);
-            for(ll k = 1; k < dist; k++){
-                river[j][k] = *window.begin()+river[j][k];
+            
+            ll k = 0;
+            for(k = 1; k <= dist; k++){
+                river[j][k] = *window.begin() + river[j][k];
                 window.insert(river[j][k]);
             }
-            for(ll k = dist; k < col; k++){
+            for(k = dist+1; k < col; k++){
                 window.extract(river[j][k-dist-1]);
-                // for(ll ele : window){
-                //     cout << ele << ' ';
-                // }  
-                // cout << '\n';
                 river[j][k] = *window.begin()+river[j][k];
                 window.insert(river[j][k]);
             }
             row_costs[j] = river[j][col-1];
-            // for(ll k = 0; k < river[j].size(); k++){
-            //     cout << river[j][k] << ' ';
-            // }
-            // cout << '\n';
-            // cout << river[j][col-1];
         }
 
+        if(bridges > row) bridges = row;
         ll first = 0;
         ll second = bridges;
         ll sum = 0;
