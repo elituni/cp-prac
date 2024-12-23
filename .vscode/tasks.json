@@ -19,7 +19,7 @@
         {
             "label": "compile and run",
             "type": "shell",
-            "command": "g++ -std=c++20 -o ./cpp-exec/${fileBasenameNoExtension} ${file} && ./cpp-exec/${fileBasenameNoExtension} < ./in-out/in.txt > ./in-out/out.txt && rm ./cpp-exec/*",
+            "command": "g++ -fsanitize=address -g -std=c++20 ${file} -o ./cpp-exec/${fileBasenameNoExtension} && ./cpp-exec/${fileBasenameNoExtension} < ./in-out/in.txt > ./in-out/out.txt && rm ./cpp-exec/*",
             "group": {
                 "kind": "build",
                 "isDefault": true
