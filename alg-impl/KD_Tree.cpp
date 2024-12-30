@@ -1,6 +1,7 @@
 #include <algorithm> 
 #include <vector>
 #include <iostream>
+#include <cmath>
 
 class Node{
     public:
@@ -125,4 +126,35 @@ int sq_distance(std::vector<int> p1, std::vector<int> p2){
     return dist;
 }
 
-//TODO: nearest neighbor implementation
+std::vector<int> nearest_neighbor(Node* current, std::vector<int> min, std::vector<int> target, int dim){
+    if(current -> key == target || min == target){
+        return target;
+    }if(target[dim] < (current -> key)[dim]){
+        if(current -> left == nullptr){
+            return current -> key;
+        }else{
+            min = nearest_neighbor(current -> left, min, target, (dim+1)%target.size());
+            int distance = sq_distance(min, target);
+            if(distance > sq_distance(current -> key, target)){
+                min = current -> key;
+            }
+            if(std::pow((current -> key)[dim]-target[dim],2) < distance){
+                min = nearest_neighbor(current -> right, min, target, (dim+1)%target.size());
+            }
+        }
+    }if(target[dim] > (current -> key)[dim]){
+        if(current -> right == nullptr){
+            return current -> key;
+        }else{
+            min = nearest_neighbor(current -> right, min, target, (dim+1)%target.size());
+            int distance = sq_distance(min, target);
+            if(distance > sq_distance(current -> key, target)){
+                min = current -> key;
+            }
+            if(std::pow((current -> key)[dim]-target[dim],2) < distance){
+                min = nearest_neighbor(current -> left, min, target, (dim+1)%target.size());
+            }
+        }
+    }
+    return min;
+}
