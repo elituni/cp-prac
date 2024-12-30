@@ -5,17 +5,12 @@
 class Node{
     public:
         std::vector<int> key;
-        // Node* parent = nullptr;
         Node* left = nullptr;
         Node* right = nullptr;
 
         Node(std::vector<int> k){
             key = k;
         }
-        // Node(Node* p, std::vector<int> k){
-        //     parent = p;
-        //     key = k;
-        // }
 };
 
 int partition(int l, int r, std::vector<std::vector<int>>& array, int dim){
