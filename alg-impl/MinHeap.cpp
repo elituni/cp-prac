@@ -1,5 +1,6 @@
 #include <vector>
 #include <algorithm>
+#include <iostream>
 using namespace std;
 
 class MinHeap{
@@ -63,3 +64,22 @@ class MinHeap{
         }
 
 };
+
+int main(){
+    vector<int> numbers = {24, 9, 11, -1, -8, -6, -18, -4, -9, 18, -21, -10, 2, 6, 21, -25, -3, -24, -13, 16};
+    MinHeap h(numbers);
+    for(int i = 0; i < 20; i++){
+        cout << h.pop() << ' ';
+    }
+    cout << endl;
+    
+    h.insert(3);
+    h.insert(2);
+    h.insert(15);
+    h.insert(5);
+    h.insert(4);
+    h.insert(45);
+    cout << h.peek() << " ";
+    cout << h.pop() << " ";
+    cout << h.peek() << " ";
+}
