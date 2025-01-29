@@ -33,20 +33,3 @@ struct MaxQueue{
     }
 };
 
-vector<int> solve(vector<int> arr, vector<int> queries) {
-    vector<int> sol;
-    for(int query : queries){
-        MaxQueue q;
-        for(int i = 0; i < query; i++){
-            q.push(arr[i]);
-        }
-        int min = q.max();
-        for(int i = query; i < arr.size(); i++){
-            q.push(arr[i]);
-            q.pop();
-            min = std::min(min, q.max());
-        }
-        sol.push_back(min);
-    }
-    return sol;
-}
