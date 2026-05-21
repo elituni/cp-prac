@@ -26,9 +26,9 @@ int main(){
         }
     }
 
-    for(int k = 0; k < graph.size(); k++){
-        for(int i = 0; i < graph.size(); i++){
-            for(int j = 0; j < graph.size(); j++){
+    for(int i = 0; i < graph.size(); i++){
+        for(int j = 0; j < graph.size(); j++){
+            for(int k = 0; k < graph.size(); k++){
                 if(d[i][j] > d[i][k] + d[k][j]){
                     d[i][j] = d[i][k] + d[k][j];
                 }
